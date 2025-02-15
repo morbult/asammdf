@@ -69,7 +69,10 @@ class TestPushButtons(TestBatchWidget):
         """
         # Prepare expected results
         # Linux cannot decode using 'utf-8' standard codec
-        with OpenMDF(self.mdf_path) as mdf_file, codecs.open(str(self.dbc_path), encoding="ISO-8859-1") as dbc_file:
+        with (
+            OpenMDF(self.mdf_path) as mdf_file,
+            codecs.open(str(self.dbc_path), encoding="ISO-8859-1") as dbc_file,
+        ):
             for key, value in mdf_file.bus_logging_map.items():
                 if value:
                     prefix = key
@@ -345,7 +348,8 @@ class TestPushButtons(TestBatchWidget):
             self.assertEqual(np.timedelta64(csv_table.timestamps.values.min(), "us").item().seconds, 0)
             # Evaluate timestamps max
             self.assertEqual(
-                np.timedelta64(csv_table.timestamps.values.max(), "us").item().microseconds, int(microseconds)
+                np.timedelta64(csv_table.timestamps.values.max(), "us").item().microseconds,
+                int(microseconds),
             )
             self.assertEqual(np.timedelta64(csv_table.timestamps.values.max(), "us").item().seconds, seconds)
 

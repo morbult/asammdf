@@ -193,7 +193,10 @@ class TestTableViewShortcuts(TestFileWidget):
         # Add items to the widget
         self.assertIsNotNone(
             self.add_channels(
-                ["ASAM_[14].M.MATRIX_DIM_16.UBYTE.IDENTICAL", "ASAM_[15].M.MATRIX_DIM_16.UBYTE.IDENTICAL"]
+                [
+                    "ASAM_[14].M.MATRIX_DIM_16.UBYTE.IDENTICAL",
+                    "ASAM_[15].M.MATRIX_DIM_16.UBYTE.IDENTICAL",
+                ]
             )
         )
         # Evaluate precondition

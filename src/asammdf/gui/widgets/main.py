@@ -385,7 +385,11 @@ class MainWindow(WithMDIArea, Ui_PyMDFMainWindow, QtWidgets.QMainWindow):
         icon.addPixmap(QtGui.QPixmap(":/fit.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         action = QtGui.QAction(icon, f"{'Fit selected': <20}\tShift+F", menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_F, modifier=QtCore.Qt.KeyboardModifier.ShiftModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_F,
+                modifier=QtCore.Qt.KeyboardModifier.ShiftModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Shift+F"))
         plot_actions.addAction(action)
@@ -422,7 +426,11 @@ class MainWindow(WithMDIArea, Ui_PyMDFMainWindow, QtWidgets.QMainWindow):
         icon.addPixmap(QtGui.QPixmap(":/list2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         action = QtGui.QAction(icon, "{: <20}\tShift+S".format("Stack selected"), menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_S, modifier=QtCore.Qt.KeyboardModifier.ShiftModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_S,
+                modifier=QtCore.Qt.KeyboardModifier.ShiftModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Shift+S"))
         plot_actions.addAction(action)
@@ -584,14 +592,22 @@ class MainWindow(WithMDIArea, Ui_PyMDFMainWindow, QtWidgets.QMainWindow):
 
         action = QtGui.QAction("{: <20}\tAlt+R".format("Raw samples"), menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_R, modifier=QtCore.Qt.KeyboardModifier.AltModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_R,
+                modifier=QtCore.Qt.KeyboardModifier.AltModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Alt+R"))
         samples_format_actions.addAction(action)
 
         action = QtGui.QAction("{: <20}\tAlt+S".format("Scaled samples"), menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_S, modifier=QtCore.Qt.KeyboardModifier.AltModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_S,
+                modifier=QtCore.Qt.KeyboardModifier.AltModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Alt+S"))
         samples_format_actions.addAction(action)
@@ -702,7 +718,11 @@ class MainWindow(WithMDIArea, Ui_PyMDFMainWindow, QtWidgets.QMainWindow):
         icon.addPixmap(QtGui.QPixmap(":/bookmark.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         action = QtGui.QAction(icon, "{: <20}\tAlt+I".format("Toggle bookmarks"), menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_I, modifier=QtCore.Qt.KeyboardModifier.AltModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_I,
+                modifier=QtCore.Qt.KeyboardModifier.AltModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Alt+I"))
         cursors_actions.addAction(action)
@@ -1393,7 +1413,9 @@ class MainWindow(WithMDIArea, Ui_PyMDFMainWindow, QtWidgets.QMainWindow):
 
     def comparison_search(self, event):
         event = QtGui.QKeyEvent(
-            QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_F, QtCore.Qt.KeyboardModifier.ControlModifier
+            QtCore.QEvent.Type.KeyPress,
+            QtCore.Qt.Key.Key_F,
+            QtCore.Qt.KeyboardModifier.ControlModifier,
         )
         self.keyPressEvent(event)
 
@@ -1446,7 +1468,9 @@ class MainWindow(WithMDIArea, Ui_PyMDFMainWindow, QtWidgets.QMainWindow):
         if self.stackedWidget.currentIndex() == 0:
             widget = self.files.currentWidget()
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_L, QtCore.Qt.KeyboardModifier.ShiftModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_L,
+                QtCore.Qt.KeyboardModifier.ShiftModifier,
             )
             if widget:
                 widget.keyPressEvent(event)
@@ -1491,7 +1515,9 @@ class MainWindow(WithMDIArea, Ui_PyMDFMainWindow, QtWidgets.QMainWindow):
                         new_global_variables = file.global_variables
 
                     file.update_functions(
-                        original_definitions, modified_definitions, new_global_variables=new_global_variables
+                        original_definitions,
+                        modified_definitions,
+                        new_global_variables=new_global_variables,
                     )
 
     def bus_database_manager(self):

@@ -206,14 +206,22 @@ class PlotWindow(QtWidgets.QMainWindow):
 
         action = QtGui.QAction("{: <20}\tAlt+R".format("Raw samples"), menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_R, modifier=QtCore.Qt.KeyboardModifier.AltModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_R,
+                modifier=QtCore.Qt.KeyboardModifier.AltModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Alt+R"))
         samples_format_actions.addAction(action)
 
         action = QtGui.QAction("{: <20}\tAlt+S".format("Scaled samples"), menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_S, modifier=QtCore.Qt.KeyboardModifier.AltModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_S,
+                modifier=QtCore.Qt.KeyboardModifier.AltModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Alt+S"))
         samples_format_actions.addAction(action)
@@ -283,7 +291,11 @@ class PlotWindow(QtWidgets.QMainWindow):
         icon = QtGui.QIcon()
         action = QtGui.QAction("{: <20}\tAlt+I".format("Toggle trigger texts"), menu)
         action.triggered.connect(
-            partial(self.plot_action, key=QtCore.Qt.Key.Key_I, modifier=QtCore.Qt.KeyboardModifier.AltModifier)
+            partial(
+                self.plot_action,
+                key=QtCore.Qt.Key.Key_I,
+                modifier=QtCore.Qt.KeyboardModifier.AltModifier,
+            )
         )
         action.setShortcut(QtGui.QKeySequence("Alt+I"))
         cursors_actions.addAction(action)

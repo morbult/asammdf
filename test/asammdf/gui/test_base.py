@@ -12,6 +12,7 @@ class DragAndDrop
     - responsible to perform Drag and Drop operations
      from source widget - specific point, to destination widget - specific point
 """
+
 from collections.abc import Iterable
 import os
 import pathlib
@@ -197,7 +198,10 @@ class TestBase(unittest.TestCase):
         self.processEvents(0.01)
         # To avoid blinking issue, click on a center of widget
         QtTest.QTest.mouseClick(
-            w, QtCore.Qt.MouseButton.LeftButton, QtCore.Qt.KeyboardModifier.NoModifier, w.rect().center()
+            w,
+            QtCore.Qt.MouseButton.LeftButton,
+            QtCore.Qt.KeyboardModifier.NoModifier,
+            w.rect().center(),
         )
 
 

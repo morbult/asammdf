@@ -16,7 +16,6 @@ from test.asammdf.gui.widgets.test_BasePlotWidget import TestPlotWidget
 
 
 class TestPlotGraphicsShortcuts(TestPlotWidget):
-
     def setUp(self):
         """
         Events:
@@ -1055,7 +1054,12 @@ class TestPlotGraphicsShortcuts(TestPlotWidget):
         # Zoom out
         x = round(self.plot.plot.width() / 2)
         y = round(self.plot.plot.height() / 2)
-        QTest.mouseClick(self.pg.viewport(), Qt.MouseButton.LeftButton, Qt.KeyboardModifier.NoModifier, QPoint(x, y))
+        QTest.mouseClick(
+            self.pg.viewport(),
+            Qt.MouseButton.LeftButton,
+            Qt.KeyboardModifier.NoModifier,
+            QPoint(x, y),
+        )
         self.wheel_action(self.pg.viewport(), x, y, -1)
         self.processEvents(0.1)
 

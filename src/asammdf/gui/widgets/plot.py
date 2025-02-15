@@ -2372,11 +2372,15 @@ class Plot(QtWidgets.QWidget):
 
     def clear(self):
         event = QtGui.QKeyEvent(
-            QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_A, QtCore.Qt.KeyboardModifier.ControlModifier
+            QtCore.QEvent.Type.KeyPress,
+            QtCore.Qt.Key.Key_A,
+            QtCore.Qt.KeyboardModifier.ControlModifier,
         )
         self.channel_selection.keyPressEvent(event)
         event = QtGui.QKeyEvent(
-            QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Delete, QtCore.Qt.KeyboardModifier.NoModifier
+            QtCore.QEvent.Type.KeyPress,
+            QtCore.Qt.Key.Key_Delete,
+            QtCore.Qt.KeyboardModifier.NoModifier,
         )
         self.channel_selection.keyPressEvent(event)
 
@@ -3686,7 +3690,10 @@ class PlotGraphics(pg.PlotWidget):
         self.viewbox.sigRangeChangedManually.connect(self.y_changed)
 
         self.x_axis = FormatedAxis(
-            "bottom", maxTickLength=5, background=self.backgroundBrush().color(), linked_signal=(self, None)
+            "bottom",
+            maxTickLength=5,
+            background=self.backgroundBrush().color(),
+            linked_signal=(self, None),
         )
 
         if x_axis == "time":
@@ -3699,7 +3706,10 @@ class PlotGraphics(pg.PlotWidget):
         self.x_axis.origin = origin.astimezone(LOCAL_TIMEZONE)
 
         self.y_axis = FormatedAxis(
-            "left", maxTickLength=-5, background=self.backgroundBrush().color(), linked_signal=(self, None)
+            "left",
+            maxTickLength=-5,
+            background=self.backgroundBrush().color(),
+            linked_signal=(self, None),
         )
         self.y_axis.setWidth(48)
 
@@ -3927,7 +3937,7 @@ class PlotGraphics(pg.PlotWidget):
                 bookmark = Bookmark(
                     pos=event["value"],
                     message=event["description"],
-                    title=f'{event["type"]}{label}',
+                    title=f"{event['type']}{label}",
                     color=color,
                     tool=event.get("tool", ""),
                 )
@@ -4471,7 +4481,9 @@ class PlotGraphics(pg.PlotWidget):
             if key == QtCore.Qt.Key.Key_Y and modifier == QtCore.Qt.KeyboardModifier.NoModifier:
                 if self.region is None:
                     event_ = QtGui.QKeyEvent(
-                        QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_R, QtCore.Qt.KeyboardModifier.NoModifier
+                        QtCore.QEvent.Type.KeyPress,
+                        QtCore.Qt.Key.Key_R,
+                        QtCore.Qt.KeyboardModifier.NoModifier,
                     )
                     self.keyPressEvent(event_)
 
@@ -4492,7 +4504,9 @@ class PlotGraphics(pg.PlotWidget):
                 if self.region is not None:
                     self.viewbox.setXRange(*self.region.getRegion(), padding=0)
                     event_ = QtGui.QKeyEvent(
-                        QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_R, QtCore.Qt.KeyboardModifier.NoModifier
+                        QtCore.QEvent.Type.KeyPress,
+                        QtCore.Qt.Key.Key_R,
+                        QtCore.Qt.KeyboardModifier.NoModifier,
                     )
                     self.keyPressEvent(event_)
 
@@ -6010,7 +6024,6 @@ class PlotGraphics(pg.PlotWidget):
         self._pixmap = pixmap
 
         for idx, sig in enumerate(self.signals):
-
             if sig.individual_axis:
                 axis = self.get_axis(idx)
                 if tuple(axis.range) != tuple(sig.y_range):
@@ -6059,7 +6072,6 @@ class PlotGraphics(pg.PlotWidget):
         return y, sig_y_bottom, sig_y_top
 
     def xrange_changed_handle(self, *args, force=False):
-
         if self._can_paint:
             self.trim(force=force)
             self.update()
@@ -6067,7 +6079,6 @@ class PlotGraphics(pg.PlotWidget):
         self.zoom_changed.emit(False)
 
     def y_changed(self, *args):
-
         if len(args) == 1:
             # range manually changed by the user with the wheel or drag
             mask = args[0]

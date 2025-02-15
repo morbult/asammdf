@@ -180,7 +180,10 @@ class TestContextMenu(TestPlotWidget):
             self.context_menu(action_text="Copy names [Ctrl+N]", position=position_1)
 
             clipboard = QtWidgets.QApplication.instance().clipboard().text()
-            channels = (self.plot_channel_a.text(self.Column.NAME), self.plot_channel_b.text(self.Column.NAME))
+            channels = (
+                self.plot_channel_a.text(self.Column.NAME),
+                self.plot_channel_b.text(self.Column.NAME),
+            )
             self.assertEqual("\n".join(channels), clipboard)
 
     def test_Action_CopyNamesAndValues(self):
@@ -205,7 +208,10 @@ class TestContextMenu(TestPlotWidget):
             clipboard = QtWidgets.QApplication.instance().clipboard().text()
             pattern_name = re.escape(self.plot_channel_a.text(self.Column.NAME))
             pattern_unit = re.escape(self.plot_channel_a.text(self.Column.UNIT))
-            self.assertRegex(clipboard, expected_regex=f"{pattern_name}, t = \\d+[.]?\\d+s, \\d+[.]?\\d+{pattern_unit}")
+            self.assertRegex(
+                clipboard,
+                expected_regex=f"{pattern_name}, t = \\d+[.]?\\d+s, \\d+[.]?\\d+{pattern_unit}",
+            )
 
         with self.subTest("2Channels"):
             self.plot_channel_a.setSelected(True)
@@ -632,33 +638,60 @@ class TestContextMenu(TestPlotWidget):
             - Evaluate that checkbox on column COMMON_AXIS is checked.
         """
         with self.subTest("1Channel"):
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
 
             position = self.plot.channel_selection.visualItemRect(self.plot_channel_a).center()
             self.context_menu(action_text="Add to common Y axis", position=position)
 
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
 
             self.context_menu(action_text="Add to common Y axis", position=position)
 
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
 
         with self.subTest("2Channels"):
             self.plot_channel_b.setSelected(True)
             self.plot_channel_c.setSelected(True)
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
 
             position = self.plot.channel_selection.visualItemRect(self.plot_channel_c).center()
             self.context_menu(action_text="Add to common Y axis", position=position)
 
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
 
             self.context_menu(action_text="Add to common Y axis", position=position)
 
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
 
     def test_Action_RemoveFromCommonYAxis(self):
         """
@@ -679,24 +712,39 @@ class TestContextMenu(TestPlotWidget):
             position = self.plot.channel_selection.visualItemRect(self.plot_channel_a).center()
 
             # Pre-evaluation
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
 
             # Event
             self.context_menu(action_text="Remove from common Y axis", position=position)
             # Evaluate
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
 
             # Event
             self.context_menu(action_text="Add to common Y axis", position=position)
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
             self.context_menu(action_text="Remove from common Y axis", position=position)
             # Evaluate
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
 
             # Event
             self.context_menu(action_text="Remove from common Y axis", position=position)
             # Evaluate
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_a.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_a.checkState(self.Column.COMMON_AXIS),
+            )
 
         with self.subTest("2Channels"):
             # Setup
@@ -705,30 +753,60 @@ class TestContextMenu(TestPlotWidget):
             position_c = self.plot.channel_selection.visualItemRect(self.plot_channel_c).center()
 
             # Pre-evaluation
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
 
             # Event
 
             self.context_menu(action_text="Remove from common Y axis", position=position_c)
             # Evaluate
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
 
             # Event
             self.context_menu(action_text="Add to common Y axis", position=position_c)
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
             self.context_menu(action_text="Remove from common Y axis", position=position)
             # Evaluate
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
 
             # Event
             self.context_menu(action_text="Remove from common Y axis", position=position)
             # Evaluate
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_b.checkState(self.Column.COMMON_AXIS))
-            self.assertNotEqual(QtCore.Qt.CheckState.Checked, self.plot_channel_c.checkState(self.Column.COMMON_AXIS))
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_b.checkState(self.Column.COMMON_AXIS),
+            )
+            self.assertNotEqual(
+                QtCore.Qt.CheckState.Checked,
+                self.plot_channel_c.checkState(self.Column.COMMON_AXIS),
+            )
 
     def test_Action_SetColor(self):
         """

@@ -204,7 +204,7 @@ def extract_xml_comment(comment: str) -> str:
             if common_properties is not None:
                 comments: list[str] = []
                 for e in common_properties:
-                    field = f'{e.get("name")}: {e.text}'
+                    field = f"{e.get('name')}: {e.text}"
                     comments.append(field)
                 comment = "\n".join(field)
             else:
@@ -1049,7 +1049,7 @@ def validate_version_argument(version: str, hint: int = 4) -> str:
             valid_version = "3.30"
         else:
             valid_version = "4.10"
-        message = 'Unknown mdf version "{}".' " The available versions are {};" ' automatically using version "{}"'
+        message = 'Unknown mdf version "{}". The available versions are {}; automatically using version "{}"'
         message = message.format(version, SUPPORTED_VERSIONS, valid_version)
         logger.warning(message)
     else:
@@ -1697,7 +1697,9 @@ class _Kwargs(TypedDict, total=False):
 
 
 def load_can_database(
-    path: Union[str, PathLike[str]], contents: Optional[Union[bytes, str]] = None, **kwargs: Unpack[_Kwargs]
+    path: Union[str, PathLike[str]],
+    contents: Optional[Union[bytes, str]] = None,
+    **kwargs: Unpack[_Kwargs],
 ) -> Optional[CanMatrix]:
     """
 
@@ -1778,7 +1780,9 @@ def load_can_database(
     return can_matrix
 
 
-def all_blocks_addresses(obj: Union[FileLike, mmap.mmap]) -> tuple[dict[int, bytes], dict[bytes, list[int]], list[int]]:
+def all_blocks_addresses(
+    obj: Union[FileLike, mmap.mmap],
+) -> tuple[dict[int, bytes], dict[bytes, list[int]], list[int]]:
     DG = "DG\x00\x00\x00\x00\x40\x00\x00\x00\x00\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x00"
     others = "(D[VTZIL]|AT|C[AGHNC]|EV|FH|HL|LD|MD|R[DVI]|S[IRD]|TX)\x00\x00\x00\x00"
     pattern = re.compile(
@@ -1960,7 +1964,9 @@ def load_dsp(
     if not colors_as_string and isinstance(background, str):
         background = fn.mkColor(background)
 
-    def parse_conversions(display: Optional[lxml.etree._Element]) -> dict[Optional[str], dict[str, object]]:
+    def parse_conversions(
+        display: Optional[lxml.etree._Element],
+    ) -> dict[Optional[str], dict[str, object]]:
         conversions: dict[Optional[str], dict[str, object]] = {}
 
         if display is None:
@@ -2217,7 +2223,9 @@ def load_dsp(
 
         return channels
 
-    def parse_virtual_channels(display: Optional[lxml.etree._Element]) -> dict[Optional[str], dict[str, object]]:
+    def parse_virtual_channels(
+        display: Optional[lxml.etree._Element],
+    ) -> dict[Optional[str], dict[str, object]]:
         channels: dict[Optional[str], dict[str, object]] = {}
 
         if display is None:
@@ -2467,16 +2475,15 @@ def timeit(func: Callable[_Params, _Ret]) -> Callable[_Params, _Ret]:
         t2 = perf_counter()
         delta = t2 - t1
         if delta >= 1e-3:
-            print(f"CALL {func.__qualname__}: {delta*1e3:.3f} ms")
+            print(f"CALL {func.__qualname__}: {delta * 1e3:.3f} ms")
         else:
-            print(f"CALL {func.__qualname__}: {delta*1e6:.3f} us")
+            print(f"CALL {func.__qualname__}: {delta * 1e6:.3f} us")
         return ret
 
     return timed
 
 
 class Timer:
-
     def __init__(self, name: str = "") -> None:
         self.name = name or str(id(self))
         self.count = 0
@@ -2488,7 +2495,10 @@ class Timer:
         return self
 
     def __exit__(
-        self, type: Optional[type[BaseException]], value: Optional[BaseException], traceback: Optional[TracebackType]
+        self,
+        type: Optional[type[BaseException]],
+        value: Optional[BaseException],
+        traceback: Optional[TracebackType],
     ) -> None:
         now = perf_counter()
         self.total_time += now - self.start

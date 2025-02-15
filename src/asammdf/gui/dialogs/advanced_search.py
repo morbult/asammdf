@@ -412,7 +412,6 @@ class AdvancedSearch(Ui_SearchDialog, QtWidgets.QDialog):
 
         iterator = QtWidgets.QTreeWidgetItemIterator(self.selection)
         while item := iterator.value():
-
             data = tuple(item.text(i) for i in range(self.columns))
             selection.add(data)
 
@@ -449,7 +448,10 @@ class AdvancedSearch(Ui_SearchDialog, QtWidgets.QDialog):
             return
         else:
             item = items[0]
-            group_index, index = int(item.text(self.GroupColumn)), int(item.text(self.ChannelColumn))
+            group_index, index = (
+                int(item.text(self.GroupColumn)),
+                int(item.text(self.ChannelColumn)),
+            )
 
         try:
             channel = self.mdf.get_channel_metadata(group=group_index, index=index)
@@ -458,7 +460,11 @@ class AdvancedSearch(Ui_SearchDialog, QtWidgets.QDialog):
             alias = {}
             for gp_index, gp in enumerate(self.mdf.groups):
                 for ch_index, ch in enumerate(gp.channels):
-                    if (gp_index, ch_index) != position and (ch.data_type, ch.byte_offset, ch.bit_count) == info:
+                    if (gp_index, ch_index) != position and (
+                        ch.data_type,
+                        ch.byte_offset,
+                        ch.bit_count,
+                    ) == info:
                         alias[ch.name] = (gp_index, ch_index)
 
             if alias:

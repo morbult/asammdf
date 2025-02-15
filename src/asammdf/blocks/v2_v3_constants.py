@@ -261,7 +261,26 @@ CHANNEL_FILTER_SIZE = 58
 
 FMT_CHANNEL_DISPLAYNAME = "<2sH5IH32s128s4H3d2IH"
 ChannelDisplayname = tuple[
-    bytes, int, int, int, int, int, int, int, bytes, bytes, int, int, int, int, float, float, float, int, int, int
+    bytes,
+    int,
+    int,
+    int,
+    int,
+    int,
+    int,
+    int,
+    bytes,
+    bytes,
+    int,
+    int,
+    int,
+    int,
+    float,
+    float,
+    float,
+    int,
+    int,
+    int,
 ]
 CHANNEL_DISPLAYNAME_u: Callable[[Buffer], ChannelDisplayname] = struct.Struct(FMT_CHANNEL_DISPLAYNAME).unpack
 CHANNEL_DISPLAYNAME_uf: _UnpackFrom[ChannelDisplayname] = struct.Struct(FMT_CHANNEL_DISPLAYNAME).unpack_from
@@ -296,7 +315,24 @@ CHANNEL_SHORT_uf: _UnpackFrom[ChannelShort] = struct.Struct(FMT_CHANNEL_SHORT).u
 CHANNEL_SHORT_p = struct.Struct(FMT_CHANNEL_SHORT).pack
 FMT_CHANNEL_LONGNAME = FMT_CHANNEL_SHORT + "I"
 ChannelLongname = tuple[
-    bytes, int, int, int, int, int, int, int, bytes, bytes, int, int, int, int, float, float, float, int
+    bytes,
+    int,
+    int,
+    int,
+    int,
+    int,
+    int,
+    int,
+    bytes,
+    bytes,
+    int,
+    int,
+    int,
+    int,
+    float,
+    float,
+    float,
+    int,
 ]
 CHANNEL_LONGNAME_u: Callable[[Buffer], ChannelLongname] = struct.Struct(FMT_CHANNEL_LONGNAME).unpack
 CHANNEL_LONGNAME_uf: _UnpackFrom[ChannelLongname] = struct.Struct(FMT_CHANNEL_LONGNAME).unpack_from

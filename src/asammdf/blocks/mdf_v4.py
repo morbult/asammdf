@@ -423,7 +423,7 @@ class MDF4(MDF_Common[Group]):
         flags = self.identification["unfinalized_standard_flags"]
 
         if flags & 1:
-            message = f"Unfinalised file {self.name}:" " Update of cycle counters for CG/CA blocks required"
+            message = f"Unfinalised file {self.name}: Update of cycle counters for CG/CA blocks required"
 
             logger.info(message)
         if flags & 1 << 1:
@@ -440,17 +440,13 @@ class MDF4(MDF_Common[Group]):
             logger.info(message)
         if flags & 1 << 4:
             message = (
-                f"Unfinalised file {self.name}:"
-                " Update of last DL block in each chained list"
-                " of DL blocks required"
+                f"Unfinalised file {self.name}: Update of last DL block in each chained list of DL blocks required"
             )
 
             logger.info(message)
         if flags & 1 << 5:
             message = (
-                f"Unfinalised file {self.name}:"
-                " Update of cg_data_bytes and cg_inval_bytes"
-                " in VLSD CG block required"
+                f"Unfinalised file {self.name}: Update of cg_data_bytes and cg_inval_bytes in VLSD CG block required"
             )
 
             logger.info(message)
@@ -1163,7 +1159,10 @@ class MDF4(MDF_Common[Group]):
                                         deps = []
                                         for dep in dependencies[cn_id]:
                                             if not isinstance(dep, ChannelArrayBlock):
-                                                dep_entry = (dep[0], dep[1] + (ch_len - index) * elem_id)
+                                                dep_entry = (
+                                                    dep[0],
+                                                    dep[1] + (ch_len - index) * elem_id,
+                                                )
                                                 deps.append(dep_entry)
                                         dependencies.append(deps)
                                     else:
@@ -1304,7 +1303,6 @@ class MDF4(MDF_Common[Group]):
                     data = b"".join(data)
 
                 else:
-
                     data = bytearray()
 
                     start_offset = int(start_offset)
@@ -1719,7 +1717,7 @@ class MDF4(MDF_Common[Group]):
                         cur_invalidation_size += inv_size
 
                 if (vv := (perf_counter() - tt)) > 10:
-                    print(f"{ss / 1024/1024 / vv:.6f} MB/s {cc=} {vv=}")
+                    print(f"{ss / 1024 / 1024 / vv:.6f} MB/s {cc=} {vv=}")
                     cc = 0
                     ss = 0
                     tt = perf_counter()
@@ -1733,7 +1731,10 @@ class MDF4(MDF_Common[Group]):
                         __data = data_[:record_count]
                         _count = len(__data) // samples_size
                         yield Fragment(
-                            __data, offset // samples_size, _count, invalidation_data_[:invalidation_record_count]
+                            __data,
+                            offset // samples_size,
+                            _count,
+                            invalidation_data_[:invalidation_record_count],
                         )
                         invalidation_record_count -= len(invalidation_data_)
                     else:
@@ -2679,7 +2680,9 @@ class MDF4(MDF_Common[Group]):
         if key not in self._invalidation_cache:
             self._invalidation_cache[key] = InvalidationArray(
                 get_invalidation_bits_array(
-                    invalidation_bytes, group.channel_group.invalidation_bytes_nr, pos_invalidation_bit
+                    invalidation_bytes,
+                    group.channel_group.invalidation_bytes_nr,
+                    pos_invalidation_bit,
                 ),
                 (group_index, pos_invalidation_bit),
             )
@@ -5922,7 +5925,6 @@ class MDF4(MDF_Common[Group]):
 
             # first add the signals in the simple signal list
             if sig_type == v4c.SIGNAL_TYPE_SCALAR:
-
                 if not signal.flags["C_CONTIGUOUS"]:
                     signal = np.ascontiguousarray(signal)
 
@@ -5946,7 +5948,6 @@ class MDF4(MDF_Common[Group]):
                     fields.append((vals, sig_size))
 
             elif sig_type == v4c.SIGNAL_TYPE_STRUCTURE_COMPOSITION:
-
                 if not signal.flags["C_CONTIGUOUS"]:
                     signal = np.ascontiguousarray(signal)
 
@@ -7527,7 +7528,6 @@ class MDF4(MDF_Common[Group]):
         master_is_required: bool,
         skip_vlsd: bool = False,
     ) -> tuple[NDArray[Any], NDArray[Any] | None, NDArray[Any] | None, str | None]:
-
         grp = group
         # get group data
         if data is None:
@@ -7661,7 +7661,11 @@ class MDF4(MDF_Common[Group]):
 
             if one_piece:
                 fragment = data
-                data_bytes, rec_offset, rec_count = fragment.data, fragment.record_offset, fragment.record_count
+                data_bytes, rec_offset, rec_count = (
+                    fragment.data,
+                    fragment.record_offset,
+                    fragment.record_count,
+                )
 
                 info = grp.record[ch_nr]
 
@@ -8500,7 +8504,6 @@ class MDF4(MDF_Common[Group]):
 
                             signals.append((signal, invalidation_bits))
                 else:
-
                     if idx == 0:
                         for channel_index in channels:
                             signal = self.get(
@@ -8658,7 +8661,6 @@ class MDF4(MDF_Common[Group]):
             metadata = (time_name, time_ch.sync_type)
 
             if time_ch.channel_type == v4c.CHANNEL_TYPE_VIRTUAL_MASTER:
-
                 if record_count is None:
                     t = arange(record_offset, cycles_nr, 1, dtype=float64)
                 else:
@@ -9393,8 +9395,7 @@ class MDF4(MDF_Common[Group]):
                         else:
                             cntr += 1
                     message = (
-                        f'Destination file "{dst}" already exists '
-                        f'and "overwrite" is False. Saving MDF file as "{name}"'
+                        f'Destination file "{dst}" already exists and "overwrite" is False. Saving MDF file as "{name}"'
                     )
                     logger.warning(message)
                     dst = name
@@ -10838,9 +10839,7 @@ class MDF4(MDF_Common[Group]):
                     group=group_index,
                     data=fragment,
                     samples_only=True,
-                )[
-                    0
-                ].astype("<u1")
+                )[0].astype("<u1")
 
                 msg_ids = (
                     self.get(
@@ -10848,9 +10847,7 @@ class MDF4(MDF_Common[Group]):
                         group=group_index,
                         data=fragment,
                         samples_only=True,
-                    )[
-                        0
-                    ].astype("<u4")
+                    )[0].astype("<u4")
                     & 0x1FFFFFFF
                 )
 
@@ -10878,9 +10875,7 @@ class MDF4(MDF_Common[Group]):
                     group=group_index,
                     data=fragment,
                     samples_only=True,
-                )[
-                    0
-                ].astype("<u1")
+                )[0].astype("<u1")
 
                 msg_ids = (
                     self.get(
@@ -10888,9 +10883,7 @@ class MDF4(MDF_Common[Group]):
                         group=group_index,
                         data=fragment,
                         samples_only=True,
-                    )[
-                        0
-                    ].astype("<u4")
+                    )[0].astype("<u4")
                     & 0x1FFFFFFF
                 )
 
@@ -10941,9 +10934,7 @@ class MDF4(MDF_Common[Group]):
                     group=group_index,
                     data=fragment,
                     samples_only=True,
-                )[
-                    0
-                ].astype("<u1")
+                )[0].astype("<u1")
 
                 msg_ids = self.get("CAN_DataFrame.ID", group=group_index, data=fragment).astype("<u4") & 0x1FFFFFFF
 
@@ -11095,9 +11086,7 @@ class MDF4(MDF_Common[Group]):
                         group=group_index,
                         data=fragment,
                         samples_only=True,
-                    )[
-                        0
-                    ].astype("<u4")
+                    )[0].astype("<u4")
                     & 0x1FFFFFFF
                 )
 

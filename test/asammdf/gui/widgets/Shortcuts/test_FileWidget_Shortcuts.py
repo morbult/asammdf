@@ -291,8 +291,14 @@ class TestFileWidgetShortcuts(TestFileWidget):
 
         # Evaluate
         self.assertTrue(self.widget._frameless_windows)
-        self.assertLess(previous_size.width(), self.widget.mdi_area.subWindowList()[0].widget().frameSize().width())
-        self.assertLess(previous_size.height(), self.widget.mdi_area.subWindowList()[0].widget().frameSize().height())
+        self.assertLess(
+            previous_size.width(),
+            self.widget.mdi_area.subWindowList()[0].widget().frameSize().width(),
+        )
+        self.assertLess(
+            previous_size.height(),
+            self.widget.mdi_area.subWindowList()[0].widget().frameSize().height(),
+        )
 
         # Setup
         previous_size = self.widget.mdi_area.subWindowList()[0].widget().frameSize()
@@ -302,9 +308,13 @@ class TestFileWidgetShortcuts(TestFileWidget):
 
         # Evaluate
         self.assertFalse(self.widget._frameless_windows)
-        self.assertGreater(previous_size.width(), self.widget.mdi_area.subWindowList()[0].widget().frameSize().width())
         self.assertGreater(
-            previous_size.height(), self.widget.mdi_area.subWindowList()[0].widget().frameSize().height()
+            previous_size.width(),
+            self.widget.mdi_area.subWindowList()[0].widget().frameSize().width(),
+        )
+        self.assertGreater(
+            previous_size.height(),
+            self.widget.mdi_area.subWindowList()[0].widget().frameSize().height(),
         )
 
     def test_toggle_channel_list_shortcut(self):

@@ -364,7 +364,10 @@ class TestPushButtonApply(TestBatchWidget):
             self.assertEqual(np.timedelta64(pandas_tab.timestamps.values.min(), "us").item().microseconds, 0)
             self.assertEqual(np.timedelta64(pandas_tab.timestamps.values.min(), "us").item().seconds, 0)
             # Evaluate timestamps max
-            self.assertEqual(np.timedelta64(pandas_tab.timestamps.values.max(), "us").item().microseconds, microseconds)
+            self.assertEqual(
+                np.timedelta64(pandas_tab.timestamps.values.max(), "us").item().microseconds,
+                microseconds,
+            )
             self.assertEqual(np.timedelta64(pandas_tab.timestamps.values.max(), "us").item().seconds, seconds)
 
             # Evaluate channels names and units

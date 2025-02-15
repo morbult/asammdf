@@ -79,7 +79,9 @@ class FunctionsManagerDialog(QtWidgets.QDialog):
         for name, info in self.widget.definitions.items():
             if info["current_definition"] != info["definition"]:
                 result = MessageBox.question(
-                    self, "Unsaved function definitions", "Do you want to review the functions before exporting them?"
+                    self,
+                    "Unsaved function definitions",
+                    "Do you want to review the functions before exporting them?",
                 )
                 if result == MessageBox.StandardButton.No:
                     break

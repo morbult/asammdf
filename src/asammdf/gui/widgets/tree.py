@@ -1057,7 +1057,9 @@ class ChannelsTreeWidget(QtWidgets.QTreeWidget):
 
         if action_text == "Copy names [Ctrl+N]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_N, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_N,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.keyPressEvent(event)
 
@@ -1391,7 +1393,9 @@ class ChannelsTreeWidget(QtWidgets.QTreeWidget):
 
         elif action_text == "Delete [Del]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Delete, QtCore.Qt.KeyboardModifier.NoModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_Delete,
+                QtCore.Qt.KeyboardModifier.NoModifier,
             )
             self.keyPressEvent(event)
 
@@ -1453,13 +1457,17 @@ class ChannelsTreeWidget(QtWidgets.QTreeWidget):
 
         elif action_text == "Add channel group [Shift+Insert]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Insert, QtCore.Qt.KeyboardModifier.ShiftModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_Insert,
+                QtCore.Qt.KeyboardModifier.ShiftModifier,
             )
             self.keyPressEvent(event)
 
         elif action_text == "Add pattern based channel group [Ctrl+Insert]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Insert, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_Insert,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.keyPressEvent(event)
 
@@ -1631,32 +1639,44 @@ class ChannelsTreeWidget(QtWidgets.QTreeWidget):
             self.setColumnHidden(self.IndividualAxisColumn, not self.isColumnHidden(self.IndividualAxisColumn))
         elif action_text == "Raw samples\t[Alt+R]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_R, QtCore.Qt.KeyboardModifier.AltModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_R,
+                QtCore.Qt.KeyboardModifier.AltModifier,
             )
             self.plot.keyPressEvent(event)
         elif action_text == "Scaled samples\t[Alt+S]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_S, QtCore.Qt.KeyboardModifier.AltModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_S,
+                QtCore.Qt.KeyboardModifier.AltModifier,
             )
             self.plot.keyPressEvent(event)
         elif action_text == "Ascii\t[Ctrl+T]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_T, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_T,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.plot.keyPressEvent(event)
         elif action_text == "Bin\t[Ctrl+B]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_B, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_B,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.plot.keyPressEvent(event)
         elif action_text == "Hex\t[Ctrl+H]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_H, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_H,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.plot.keyPressEvent(event)
         elif action_text == "Physical\t[Ctrl+P]":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_P, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_P,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.plot.keyPressEvent(event)
 
@@ -1698,7 +1718,6 @@ class ChannelsTreeWidget(QtWidgets.QTreeWidget):
             self.setStyleSheet(SCROLLBAR_STYLE.format(font_size=size, color=color))
 
     def set_style(self):
-
         dark = (
             QtWidgets.QApplication.instance().palette().window().color().value()
             < QtWidgets.QApplication.instance().palette().windowText().color().value()

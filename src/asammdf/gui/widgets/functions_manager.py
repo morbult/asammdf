@@ -18,7 +18,15 @@ from .python_highlighter import PythonHighlighter
 
 
 class FunctionsManager(Ui_FunctionsManager, QtWidgets.QWidget):
-    def __init__(self, definitions, channels=None, selected_definition="", global_variables="", *args, **kwargs):
+    def __init__(
+        self,
+        definitions,
+        channels=None,
+        selected_definition="",
+        global_variables="",
+        *args,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
 
@@ -244,7 +252,9 @@ def MyAverage(main_clock=0, p_FL=0, p_FR=0, p_RL=0, p_RR=0, vehicle_speed=0, t=0
         for name, info in self.definitions.items():
             if info["current_definition"] != info["definition"]:
                 result = MessageBox.question(
-                    self, "Unsaved function definitions", "Do you want to review the functions before exporting them?"
+                    self,
+                    "Unsaved function definitions",
+                    "Do you want to review the functions before exporting them?",
                 )
                 if result == MessageBox.StandardButton.No:
                     break
@@ -372,7 +382,6 @@ def MyAverage(main_clock=0, p_FL=0, p_FR=0, p_RL=0, p_RR=0, vehicle_speed=0, t=0
         return names
 
     def store_definition(self, *args):
-
         item = self.functions_list.currentItem()
         if not item:
             return
@@ -383,15 +392,13 @@ def MyAverage(main_clock=0, p_FL=0, p_FR=0, p_RL=0, p_RR=0, vehicle_speed=0, t=0
 
         ok, func = self.check_syntax(silent=True)
         if ok:
-
             func_name = func.__name__
 
             if current_name != func_name and func_name in self.definitions:
                 MessageBox.information(
                     self,
                     "Invalid function name",
-                    f'The name "{func_name}" is already given to another function.\n'
-                    "The function names must be unique",
+                    f'The name "{func_name}" is already given to another function.\nThe function names must be unique',
                 )
 
             else:

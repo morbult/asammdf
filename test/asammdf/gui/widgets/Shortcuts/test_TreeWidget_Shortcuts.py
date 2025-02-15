@@ -385,7 +385,8 @@ class TestChannelsTreeWidgetShortcuts(TestPlotWidget):
         # Evaluate
         mo_instance.return_value.clipboard.return_value.text.assert_called()
         self.assertEqual(
-            self.ctw.topLevelItem(0).get_display_properties(), self.ctw.topLevelItem(1).get_display_properties()
+            self.ctw.topLevelItem(0).get_display_properties(),
+            self.ctw.topLevelItem(1).get_display_properties(),
         )
 
     def test_copy_names_shortcut(self):
@@ -519,7 +520,12 @@ class TestChannelsTreeWidgetShortcuts(TestPlotWidget):
             if sig.samples[_] == sig.samples.max():
                 max_ = _
                 break
-        x, y, w, h = sig.timestamps[min_], sig.samples[min_], sig.timestamps[med_], sig.samples[med_]
+        x, y, w, h = (
+            sig.timestamps[min_],
+            sig.samples[min_],
+            sig.timestamps[med_],
+            sig.samples[med_],
+        )
         # Set X and Y ranges for viewbox
         plot.plot.viewbox.setXRange(x, w, padding=0)
         plot.plot.viewbox.setYRange(y, h, padding=0)
@@ -545,7 +551,12 @@ class TestChannelsTreeWidgetShortcuts(TestPlotWidget):
         self.assertTrue(Pixmap.has_color(plot_graphics, red))
         self.assertFalse(Pixmap.has_color(plot_graphics, self.channels[0]))
 
-        x, y, w, h = sig.timestamps[med_], sig.samples[med_], sig.timestamps[max_], sig.samples[max_]
+        x, y, w, h = (
+            sig.timestamps[med_],
+            sig.samples[med_],
+            sig.timestamps[max_],
+            sig.samples[max_],
+        )
         # Set X and Y ranges for viewbox
         plot.plot.viewbox.setXRange(x, w, padding=0)
         plot.plot.viewbox.setYRange(y, h, padding=0)

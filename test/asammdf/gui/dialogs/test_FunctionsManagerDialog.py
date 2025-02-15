@@ -222,7 +222,8 @@ class TestPushButtons(TestBase):
         with open(saved_file) as fpr:
             content = json.load(fpr)
             self.assertDictEqual(
-                content, {"Function1": "def Function1(t=0):\n    return 0", "__global_variables__": ""}
+                content,
+                {"Function1": "def Function1(t=0):\n    return 0", "__global_variables__": ""},
             )
 
     def test_PushButton_CheckSyntax_0(self):

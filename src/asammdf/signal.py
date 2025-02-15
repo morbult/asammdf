@@ -887,7 +887,8 @@ class Signal:
                 )
             else:
                 invalidation_bits = InvalidationArray(
-                    np.append(self.invalidation_bits, other.invalidation_bits), self.invalidation_bits.origin
+                    np.append(self.invalidation_bits, other.invalidation_bits),
+                    self.invalidation_bits.origin,
                 )
 
             result = Signal(

@@ -230,7 +230,9 @@ class ListWidget(QtWidgets.QListWidget):
 
         if action.text() == "Copy name (Ctrl+C)":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_C, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_C,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.itemWidget(item).keyPressEvent(event)
 
@@ -360,7 +362,9 @@ class ListWidget(QtWidgets.QListWidget):
 
         elif action.text() == "Delete (Del)":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Delete, QtCore.Qt.KeyboardModifier.NoModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_Delete,
+                QtCore.Qt.KeyboardModifier.NoModifier,
             )
             self.keyPressEvent(event)
 
@@ -529,17 +533,23 @@ class MinimalListWidget(QtWidgets.QListWidget):
 
         if action.text() == "Delete (Del)":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Delete, QtCore.Qt.KeyboardModifier.NoModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_Delete,
+                QtCore.Qt.KeyboardModifier.NoModifier,
             )
             self.keyPressEvent(event)
         elif action.text() == "Copy names (Ctrl+C)":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_C, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_C,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.keyPressEvent(event)
         elif action.text() == "Paste names (Ctrl+V)":
             event = QtGui.QKeyEvent(
-                QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_V, QtCore.Qt.KeyboardModifier.ControlModifier
+                QtCore.QEvent.Type.KeyPress,
+                QtCore.Qt.Key.Key_V,
+                QtCore.Qt.KeyboardModifier.ControlModifier,
             )
             self.keyPressEvent(event)
 

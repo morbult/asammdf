@@ -694,7 +694,8 @@ class TestPushButtons(TestPlotWidget):
             self.assertEqual(self.plot_graph_channel_0.y_range[0], self.plot_graph_channel_1.y_range[0])
             self.assertEqual(self.plot_graph_channel_0.y_range[1], self.plot_graph_channel_1.y_range[1])
             self.assertLess(
-                prev_trim_info, self.plot_graph_channel_0.trim_info[1] - self.plot_graph_channel_0.trim_info[0]
+                prev_trim_info,
+                self.plot_graph_channel_0.trim_info[1] - self.plot_graph_channel_0.trim_info[0],
             )
             self.assertTupleEqual(self.plot_graph_channel_0.trim_info, self.plot_graph_channel_1.trim_info)
 
